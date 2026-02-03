@@ -1,0 +1,511 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>💕 For My Dearest Divya 💕</title>
+    <meta name="description" content="A special Valentine's Day countdown surprise">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;700&family=Playfair+Display:wght@400;600;700&family=Poppins:wght@300;400;500;600&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <!-- Floating Hearts Background -->
+    <div class="hearts-bg" id="heartsBg"></div>
+
+    <!-- Navigation -->
+    <nav class="nav">
+        <button class="nav-btn active" data-section="countdown">
+            <span class="nav-icon">💕</span>
+            <span class="nav-text">Countdown</span>
+        </button>
+        <button class="nav-btn" data-section="gifts">
+            <span class="nav-icon">🎁</span>
+            <span class="nav-text">Daily Gifts</span>
+        </button>
+        <button class="nav-btn" data-section="game">
+            <span class="nav-icon">🎮</span>
+            <span class="nav-text">Love Game</span>
+        </button>
+        <button class="nav-btn" data-section="gallery">
+            <span class="nav-icon">📸</span>
+            <span class="nav-text">Gallery</span>
+        </button>
+        <button class="nav-btn" data-section="quiz">
+            <span class="nav-icon">💝</span>
+            <span class="nav-text">Quiz</span>
+        </button>
+        <button class="nav-btn" data-section="lovelock">
+            <span class="nav-icon">🔐</span>
+            <span class="nav-text">Love Lock</span>
+        </button>
+        <button class="nav-btn" data-section="ai">
+            <span class="nav-icon">✨</span>
+            <span class="nav-text">AI Magic</span>
+        </button>
+    </nav>
+
+    <!-- Main Countdown Section -->
+    <section id="countdown" class="section active">
+        <div class="container">
+            <div class="hero">
+                <div class="sparkle sparkle-1">✨</div>
+                <div class="sparkle sparkle-2">💫</div>
+                <div class="sparkle sparkle-3">✨</div>
+
+                <h1 class="title">
+                    <span class="title-small">My Dearest Divya,</span>
+                    <span class="title-main">Valentine's Day</span>
+                    <span class="title-heart">💕</span>
+                </h1>
+
+                <p class="subtitle" id="loveMessage">Every second brings me closer to celebrating our love...</p>
+
+                <div class="countdown-container">
+                    <div class="countdown-item">
+                        <div class="countdown-value" id="days">00</div>
+                        <div class="countdown-label">Days</div>
+                    </div>
+                    <div class="countdown-separator">:</div>
+                    <div class="countdown-item">
+                        <div class="countdown-value" id="hours">00</div>
+                        <div class="countdown-label">Hours</div>
+                    </div>
+                    <div class="countdown-separator">:</div>
+                    <div class="countdown-item">
+                        <div class="countdown-value" id="minutes">00</div>
+                        <div class="countdown-label">Minutes</div>
+                    </div>
+                    <div class="countdown-separator">:</div>
+                    <div class="countdown-item">
+                        <div class="countdown-value" id="seconds">00</div>
+                        <div class="countdown-label">Seconds</div>
+                    </div>
+                </div>
+
+                <div class="love-meter">
+                    <div class="love-meter-label">Love Level</div>
+                    <div class="love-meter-bar">
+                        <div class="love-meter-fill" id="loveMeter"></div>
+                    </div>
+                    <div class="love-meter-text">∞ Infinite ∞</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Daily Gifts Section -->
+    <section id="gifts" class="section">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">🎁 11 Days of Love</h2>
+                <p class="section-subtitle">A new surprise unlocks every day until Valentine's Day!</p>
+                <div class="next-gift-timer" id="nextGiftTimer">
+                    <span class="next-gift-label">Next gift unlocks in:</span>
+                    <span class="next-gift-time" id="nextGiftTime">00:00:00</span>
+                </div>
+            </div>
+
+            <div class="gifts-grid" id="giftsGrid">
+                <!-- Day 1 -->
+                <div class="gift-card" data-day="1" data-date="2026-02-03">
+                    <div class="gift-day">Day 1</div>
+                    <div class="gift-icon">💌</div>
+                    <div class="gift-title">Love Letter</div>
+                    <div class="gift-lock">🔒</div>
+                </div>
+                <!-- Day 2 -->
+                <div class="gift-card" data-day="2" data-date="2026-02-04">
+                    <div class="gift-day">Day 2</div>
+                    <div class="gift-icon">🌹</div>
+                    <div class="gift-title">Virtual Roses</div>
+                    <div class="gift-lock">🔒</div>
+                </div>
+                <!-- Day 3 -->
+                <div class="gift-card" data-day="3" data-date="2026-02-05">
+                    <div class="gift-day">Day 3</div>
+                    <div class="gift-icon">✨</div>
+                    <div class="gift-title">10 Things I Love</div>
+                    <div class="gift-lock">🔒</div>
+                </div>
+                <!-- Day 4 -->
+                <div class="gift-card" data-day="4" data-date="2026-02-06">
+                    <div class="gift-day">Day 4</div>
+                    <div class="gift-icon">🎵</div>
+                    <div class="gift-title">Our Playlist</div>
+                    <div class="gift-lock">🔒</div>
+                </div>
+                <!-- Day 5 -->
+                <div class="gift-card" data-day="5" data-date="2026-02-07">
+                    <div class="gift-day">Day 5</div>
+                    <div class="gift-icon">💝</div>
+                    <div class="gift-title">Romantic Poem</div>
+                    <div class="gift-lock">🔒</div>
+                </div>
+                <!-- Day 6 -->
+                <div class="gift-card" data-day="6" data-date="2026-02-08">
+                    <div class="gift-day">Day 6</div>
+                    <div class="gift-icon">🌟</div>
+                    <div class="gift-title">Our Memories</div>
+                    <div class="gift-lock">🔒</div>
+                </div>
+                <!-- Day 7 -->
+                <div class="gift-card" data-day="7" data-date="2026-02-09">
+                    <div class="gift-day">Day 7</div>
+                    <div class="gift-icon">💫</div>
+                    <div class="gift-title">Love Quotes</div>
+                    <div class="gift-lock">🔒</div>
+                </div>
+                <!-- Day 8 -->
+                <div class="gift-card" data-day="8" data-date="2026-02-10">
+                    <div class="gift-day">Day 8</div>
+                    <div class="gift-icon">🍫</div>
+                    <div class="gift-title">Chocolate Box</div>
+                    <div class="gift-lock">🔒</div>
+                </div>
+                <!-- Day 9 -->
+                <div class="gift-card" data-day="9" data-date="2026-02-11">
+                    <div class="gift-day">Day 9</div>
+                    <div class="gift-icon">🎀</div>
+                    <div class="gift-title">Soulmate Message</div>
+                    <div class="gift-lock">🔒</div>
+                </div>
+                <!-- Day 10 -->
+                <div class="gift-card" data-day="10" data-date="2026-02-12">
+                    <div class="gift-day">Day 10</div>
+                    <div class="gift-icon">💋</div>
+                    <div class="gift-title">Date Night IOU</div>
+                    <div class="gift-lock">🔒</div>
+                </div>
+                <!-- Day 11 -->
+                <div class="gift-card" data-day="11" data-date="2026-02-13">
+                    <div class="gift-day">Day 11</div>
+                    <div class="gift-icon">🔮</div>
+                    <div class="gift-title">Our Future</div>
+                    <div class="gift-lock">🔒</div>
+                </div>
+                <!-- Valentine's Day -->
+                <div class="gift-card valentine-special" data-day="14" data-date="2026-02-14">
+                    <div class="gift-day">Feb 14</div>
+                    <div class="gift-icon">❤️</div>
+                    <div class="gift-title">Valentine's Day!</div>
+                    <div class="gift-lock">🔒</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Love Game Section -->
+    <section id="game" class="section">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">💕 Love Memory Game</h2>
+                <p class="section-subtitle">Match the romantic pairs to win!</p>
+            </div>
+
+            <div class="game-stats">
+                <div class="stat">
+                    <span class="stat-label">Moves</span>
+                    <span class="stat-value" id="moves">0</span>
+                </div>
+                <div class="stat">
+                    <span class="stat-label">Matches</span>
+                    <span class="stat-value" id="matches">0</span>
+                    <span class="stat-total">/ 8</span>
+                </div>
+                <button class="btn-restart" id="restartGame">🔄 New Game</button>
+            </div>
+
+            <div class="game-board" id="gameBoard">
+                <!-- Cards will be generated by JavaScript -->
+            </div>
+
+            <div class="game-message" id="gameMessage"></div>
+        </div>
+    </section>
+
+    <!-- Photo Gallery Section -->
+    <section id="gallery" class="section">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">📸 Our Journey</h2>
+                <p class="section-subtitle">Snapshots of our beautiful love story...</p>
+            </div>
+
+            <div class="gallery-container">
+                <button class="gallery-nav prev" id="prevSlide">❮</button>
+                <div class="gallery-track-container">
+                    <ul class="gallery-track" id="galleryTrack">
+                        <li class="gallery-slide current-slide">
+                            <div class="polaroid">
+                                <div class="photo-placeholder">
+                                    <span>Add photo: images/us1.jpg</span>
+                                    <div class="photo-icon">💑</div>
+                                </div>
+                                <div class="caption">The Beginning of Us</div>
+                            </div>
+                        </li>
+                        <li class="gallery-slide">
+                            <div class="polaroid">
+                                <div class="photo-placeholder">
+                                    <span>Add photo: images/us2.jpg</span>
+                                    <div class="photo-icon">✈️</div>
+                                </div>
+                                <div class="caption">Our First Adventure</div>
+                            </div>
+                        </li>
+                        <li class="gallery-slide">
+                            <div class="polaroid">
+                                <div class="photo-placeholder">
+                                    <span>Add photo: images/us3.jpg</span>
+                                    <div class="photo-icon">🎉</div>
+                                </div>
+                                <div class="caption">Celebration Time</div>
+                            </div>
+                        </li>
+                        <li class="gallery-slide">
+                            <div class="polaroid">
+                                <div class="photo-placeholder">
+                                    <span>Add photo: images/us4.jpg</span>
+                                    <div class="photo-icon">🏠</div>
+                                </div>
+                                <div class="caption">Building Our Home</div>
+                            </div>
+                        </li>
+                        <li class="gallery-slide">
+                            <div class="polaroid">
+                                <div class="photo-placeholder">
+                                    <span>Add photo: images/us5.jpg</span>
+                                    <div class="photo-icon">💍</div>
+                                </div>
+                                <div class="caption">Forever & Always</div>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+                <button class="gallery-nav next" id="nextSlide">❯</button>
+            </div>
+            <div class="gallery-dots" id="galleryDots"></div>
+        </div>
+    </section>
+
+    <!-- Music Player -->
+    <div class="music-player" id="musicPlayer">
+        <div class="music-disc" id="musicDisc">
+            <div class="music-disc-inner">🎵</div>
+        </div>
+        <div class="music-controls">
+            <button class="btn-music" id="playPauseBtn">▶</button>
+        </div>
+        <audio id="bgMusic" loop>
+            <source src="music.mp3" type="audio/mp3">
+        </audio>
+    </div>
+
+    <!-- Love Quiz Section -->
+    <section id="quiz" class="section">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">💝 Love Quiz</h2>
+                <p class="section-subtitle">Discover your romantic personality!</p>
+            </div>
+
+            <div class="quiz-container" id="quizContainer">
+                <div class="quiz-card" id="quizCard">
+                    <div class="quiz-progress">
+                        <span id="quizProgress">Question 1 of 5</span>
+                        <div class="progress-bar">
+                            <div class="progress-fill" id="progressFill"></div>
+                        </div>
+                    </div>
+                    <div class="quiz-question" id="quizQuestion">What's your ideal romantic date?</div>
+                    <div class="quiz-options" id="quizOptions">
+                        <!-- Options generated by JS -->
+                    </div>
+                </div>
+                <div class="quiz-result hidden" id="quizResult">
+                    <div class="result-icon">💕</div>
+                    <h3 class="result-title" id="resultTitle">Your Love Style</h3>
+                    <p class="result-text" id="resultText"></p>
+                    <button class="btn-restart" id="restartQuiz">Take Again 💝</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Love Lock Section -->
+    <section id="lovelock" class="section">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">🔐 Our Love Lock</h2>
+                <p class="section-subtitle">Seal our love forever...</p>
+            </div>
+
+            <div class="lovelock-container">
+                <div class="lock-bridge">
+                    <div class="lock" id="theLock">
+                        <div class="lock-body">
+                            <div class="lock-hole">💕</div>
+                            <div class="lock-names" id="lockNames">
+                                <span class="name1">You</span>
+                                <span class="heart-between">❤️</span>
+                                <span class="name2">Me</span>
+                            </div>
+                        </div>
+                        <div class="lock-shackle" id="lockShackle"></div>
+                    </div>
+                </div>
+
+                <div class="lock-form" id="lockForm">
+                    <input type="text" class="lock-input" id="name1Input" placeholder="Your name" maxlength="12">
+                    <span class="lock-heart">💕</span>
+                    <input type="text" class="lock-input" id="name2Input" placeholder="Partner's name" maxlength="12">
+                    <button class="btn-lock" id="lockBtn">🔒 Lock Our Love Forever</button>
+                </div>
+
+                <div class="lock-message hidden" id="lockMessage">
+                    <p>Your love is sealed forever! 💕</p>
+                    <p class="lock-date" id="lockDate"></p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- AI Magic Section -->
+    <section id="ai" class="section">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">✨ AI Love Magic</h2>
+                <p class="section-subtitle">Let AI create something special just for Divya...</p>
+            </div>
+
+            <div class="ai-container">
+                <!-- AI Poem Generator -->
+                <div class="ai-card">
+                    <div class="ai-card-icon">📝</div>
+                    <h3 class="ai-card-title">AI Love Poem</h3>
+                    <p class="ai-card-desc">Generate a beautiful poem written just for you</p>
+                    <div class="ai-input-group">
+                        <input type="text" class="ai-input" id="poemTheme"
+                            placeholder="Theme (e.g., eternal love, first kiss...)">
+                    </div>
+                    <button class="btn-ai" id="generatePoem">✨ Generate Poem</button>
+                    <div class="ai-output hidden" id="poemOutput">
+                        <div class="ai-loading" id="poemLoading">
+                            <div class="loading-heart">💕</div>
+                            <p>Creating magic...</p>
+                        </div>
+                        <div class="ai-result" id="poemResult"></div>
+                    </div>
+                </div>
+
+                <!-- AI Love Story Generator -->
+                <div class="ai-card">
+                    <div class="ai-card-icon">📖</div>
+                    <h3 class="ai-card-title">Our AI Love Story</h3>
+                    <p class="ai-card-desc">Create a romantic story about your journey together</p>
+                    <div class="ai-input-group">
+                        <input type="text" class="ai-input" id="storyPartner" placeholder="Your name" value="">
+                        <input type="text" class="ai-input" id="storyMoment"
+                            placeholder="Special moment (e.g., first meeting)">
+                    </div>
+                    <button class="btn-ai" id="generateStory">✨ Generate Story</button>
+                    <div class="ai-output hidden" id="storyOutput">
+                        <div class="ai-loading" id="storyLoading">
+                            <div class="loading-heart">💕</div>
+                            <p>Writing your love story...</p>
+                        </div>
+                        <div class="ai-result" id="storyResult"></div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="ai-api-note">
+                <p>🔑 <a href="#" id="setApiKey">Set your Gemini API key</a> to enable AI features</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- API Key Modal -->
+    <div class="modal" id="apiKeyModal">
+        <div class="modal-content">
+            <button class="modal-close" id="apiKeyModalClose">×</button>
+            <h3 class="modal-title">🔑 Gemini API Key</h3>
+            <p style="color: var(--pink-light); margin-bottom: 20px;">Get your free API key from <a
+                    href="https://makersuite.google.com/app/apikey" target="_blank" style="color: var(--pink);">Google
+                    AI Studio</a></p>
+            <input type="password" class="ai-input" id="apiKeyInput" placeholder="Enter your Gemini API key"
+                style="width: 100%; margin-bottom: 20px;">
+            <button class="btn-ai" id="saveApiKey">💾 Save Key</button>
+        </div>
+    </div>
+
+    <!-- Shooting Stars Container -->
+    <div class="shooting-stars-container" id="shootingStarsContainer"></div>
+
+    <!-- Fireworks Canvas -->
+    <canvas id="fireworksCanvas" class="fireworks-canvas"></canvas>
+
+    <!-- Gift Modal -->
+    <div class="modal" id="giftModal">
+        <div class="modal-content">
+            <button class="modal-close" id="modalClose">×</button>
+            <div class="modal-icon" id="modalIcon">💌</div>
+            <h3 class="modal-title" id="modalTitle">Day 1 - Love Letter</h3>
+            <div class="modal-body" id="modalBody">
+                <!-- Gift content will be inserted here -->
+            </div>
+        </div>
+    </div>
+
+    <!-- Win Celebration -->
+    <div class="celebration" id="celebration">
+        <div class="celebration-content">
+            <div class="celebration-hearts">💕💖💕</div>
+            <h2>You Won!</h2>
+            <p id="celebrationMessage">Amazing! You matched all the love!</p>
+            <button class="btn-play-again" id="playAgain">Play Again 💕</button>
+        </div>
+    </div>
+
+    <!-- Shooting Star Wish Modal -->
+    <div class="wish-modal" id="wishModal">
+        <div class="wish-content">
+            <div class="wish-star">⭐</div>
+            <p class="wish-text" id="wishText">Your wish has been heard!</p>
+        </div>
+    </div>
+
+    <!-- Love Card Generator Modal -->
+    <div class="modal" id="cardModal">
+        <div class="modal-content card-modal-content">
+            <button class="modal-close" id="cardModalClose">×</button>
+            <h3 class="modal-title">💌 Create Your Love Card</h3>
+            <div class="card-preview" id="cardPreview">
+                <div class="love-card" id="loveCard">
+                    <div class="card-decoration">💕🌹💕</div>
+                    <h2 class="card-title">Happy Valentine's Day</h2>
+                    <p class="card-message" id="cardMessage">I love you more than words can say...</p>
+                    <p class="card-signature">Forever Yours 💕</p>
+                </div>
+            </div>
+            <textarea class="card-input" id="cardInput" placeholder="Write your message..." maxlength="150"></textarea>
+            <div class="card-buttons">
+                <button class="btn-card" id="generateCardBtn">✨ Generate Card</button>
+                <button class="btn-card secondary" id="downloadCardBtn">📥 Download</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Floating Love Card Button -->
+    <button class="floating-card-btn" id="openCardBtn">💌</button>
+
+    <script src="script.js"></script>
+</body>
+
+</html>
