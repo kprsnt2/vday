@@ -1239,10 +1239,19 @@ Make it romantic and touching. Use her name "${COUPLE_INFO.wifeName}" naturally 
 Do not include any introduction or explanation, just the poem itself.`;
 
         try {
-            const poem = await callGeminiAPI(prompt);
-            poemResult.textContent = poem;
-            poemResult.style.display = 'block';
-            createConfetti();
+            const apiKey = localStorage.getItem('geminiApiKey');
+            if (!apiKey) {
+                poemResult.innerHTML = `
+                    <p>🔑 Please set your Gemini API key first!</p>
+                    <p><a href="#" onclick="document.getElementById('apiKeyModal').classList.add('active'); return false;" style="color: var(--pink); text-decoration: underline;">Click here to set your API key</a></p>
+                `;
+                poemResult.style.display = 'block';
+            } else {
+                const poem = await callGeminiAPI(prompt);
+                poemResult.textContent = poem;
+                poemResult.style.display = 'block';
+                createConfetti();
+            }
         } catch (error) {
             poemResult.textContent = "❌ " + error.message;
             poemResult.style.display = 'block';
@@ -1280,10 +1289,19 @@ Include sweet details about their love and the special moment mentioned.
 Do not include any introduction, just start the story directly.`;
 
         try {
-            const story = await callGeminiAPI(prompt);
-            storyResult.textContent = story;
-            storyResult.style.display = 'block';
-            createConfetti();
+            const apiKey = localStorage.getItem('geminiApiKey');
+            if (!apiKey) {
+                storyResult.innerHTML = `
+                    <p>🔑 Please set your Gemini API key first!</p>
+                    <p><a href="#" onclick="document.getElementById('apiKeyModal').classList.add('active'); return false;" style="color: var(--pink); text-decoration: underline;">Click here to set your API key</a></p>
+                `;
+                storyResult.style.display = 'block';
+            } else {
+                const story = await callGeminiAPI(prompt);
+                storyResult.textContent = story;
+                storyResult.style.display = 'block';
+                createConfetti();
+            }
         } catch (error) {
             storyResult.textContent = "❌ " + error.message;
             storyResult.style.display = 'block';
