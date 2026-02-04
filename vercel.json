@@ -1,27 +1,14 @@
 {
   "version": 2,
-  "builds": [
-    {
-      "src": "*.html",
-      "use": "@vercel/static"
-    },
-    {
-      "src": "*.css",
-      "use": "@vercel/static"
-    },
-    {
-      "src": "*.js",
-      "use": "@vercel/static"
-    },
-    {
-      "src": "*.mp3",
-      "use": "@vercel/static"
+  "functions": {
+    "api/*.js": {
+      "runtime": "@vercel/node@3.0.0"
     }
-  ],
-  "routes": [
+  },
+  "rewrites": [
     {
-      "src": "/(.*)",
-      "dest": "/$1"
+      "source": "/api/(.*)",
+      "destination": "/api/$1"
     }
   ]
 }
