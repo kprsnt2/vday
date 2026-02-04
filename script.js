@@ -1549,16 +1549,22 @@ Format: Just the lyrics, no titles or explanations, one line per verse.`;
             if (!apiKey) {
                 lyricsResult.innerHTML = `
                     <p>🔑 Please set your Gemini API key first!</p>
-                    <p>Go to the <strong>AI Magic</strong> section and click "Set your Gemini API key"</p>
+                    <p><a href="#" id="openApiKeyFromLyrics" style="color: var(--pink); text-decoration: underline; cursor: pointer;">Click here to set your API key</a></p>
                 `;
+                lyricsResult.style.display = 'block';
+                // Add click handler for the link
+                document.getElementById('openApiKeyFromLyrics').addEventListener('click', (e) => {
+                    e.preventDefault();
+                    document.getElementById('apiKeyModal').classList.add('active');
+                });
             } else {
                 const lyrics = await callGeminiAPI(prompt);
                 lyricsResult.innerHTML = lyrics.split('\n').map(line =>
                     `<p>${line}</p>`
                 ).join('');
+                lyricsResult.style.display = 'block';
                 createConfetti();
             }
-            lyricsResult.style.display = 'block';
         } catch (error) {
             lyricsResult.textContent = "❌ " + error.message;
             lyricsResult.style.display = 'block';
