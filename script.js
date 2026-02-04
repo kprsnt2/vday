@@ -1172,29 +1172,47 @@ function setupAPIKeyModal() {
 // Gemini API Call
 async function callGeminiAPI(prompt) {
     const apiKey = localStorage.getItem('geminiApiKey');
+    console.log('🔑 Checking API Key:', apiKey ? 'Found' : 'Not Found');
+
     if (!apiKey) {
         throw new Error("Please set your Gemini API key first!");
     }
 
-    const response = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=${apiKey}`, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-            contents: [{ parts: [{ text: prompt }] }],
-            generationConfig: {
-                temperature: 0.9,
-                maxOutputTokens: 1024
-            }
-        })
-    });
+    console.log('📤 Sending request to Gemini API...');
+    console.log('📝 Prompt:', prompt.substring(0, 100) + '...');
 
-    if (!response.ok) {
-        const error = await response.json();
-        throw new Error(error.error?.message || "API request failed");
+    try {
+        const response = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=${apiKey}`, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+                contents: [{ parts: [{ text: prompt }] }],
+                generationConfig: {
+                    temperature: 0.9,
+                    maxOutputTokens: 1024
+                }
+            })
+        });
+
+        console.log('📥 Response status:', response.status);
+
+        if (!response.ok) {
+            const error = await response.json();
+            console.error('❌ API Error:', error);
+            throw new Error(error.error?.message || "API request failed");
+        }
+
+        const data = await response.json();
+        console.log('✅ API Response received:', data);
+
+        const result = data.candidates[0].content.parts[0].text;
+        console.log('📄 Generated text:', result.substring(0, 100) + '...');
+
+        return result;
+    } catch (error) {
+        console.error('❌ Gemini API Error:', error);
+        throw error;
     }
-
-    const data = await response.json();
-    return data.candidates[0].content.parts[0].text;
 }
 
 // Poem Generator
