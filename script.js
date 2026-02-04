@@ -1133,65 +1133,16 @@ const COUPLE_INFO = {
     yearsMarried: new Date().getFullYear() - 2016
 };
 
-// API Key Management
-function setupAPIKeyModal() {
-    const setApiKeyLink = document.getElementById('setApiKey');
-    const apiKeyModal = document.getElementById('apiKeyModal');
-    const apiKeyModalClose = document.getElementById('apiKeyModalClose');
-    const apiKeyInput = document.getElementById('apiKeyInput');
-    const saveApiKeyBtn = document.getElementById('saveApiKey');
-
-    setApiKeyLink.addEventListener('click', (e) => {
-        e.preventDefault();
-        apiKeyModal.classList.add('active');
-        // Load existing key if any
-        const savedKey = localStorage.getItem('geminiApiKey');
-        if (savedKey) apiKeyInput.value = savedKey;
-    });
-
-    apiKeyModalClose.addEventListener('click', () => {
-        apiKeyModal.classList.remove('active');
-    });
-
-    apiKeyModal.addEventListener('click', (e) => {
-        if (e.target === apiKeyModal) apiKeyModal.classList.remove('active');
-    });
-
-    saveApiKeyBtn.addEventListener('click', () => {
-        const key = apiKeyInput.value.trim();
-        if (key) {
-            localStorage.setItem('geminiApiKey', key);
-            apiKeyModal.classList.remove('active');
-            alert("✅ API Key saved! AI features are now enabled.");
-        } else {
-            alert("Please enter a valid API key.");
-        }
-    });
-}
-
-// Gemini API Call
+// Gemini API Call - Uses serverless function with environment variable
 async function callGeminiAPI(prompt) {
-    const apiKey = localStorage.getItem('geminiApiKey');
-    console.log('🔑 Checking API Key:', apiKey ? 'Found' : 'Not Found');
-
-    if (!apiKey) {
-        throw new Error("Please set your Gemini API key first!");
-    }
-
-    console.log('📤 Sending request to Gemini API...');
+    console.log('📤 Sending request to Gemini API via serverless function...');
     console.log('📝 Prompt:', prompt.substring(0, 100) + '...');
 
     try {
-        const response = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=${apiKey}`, {
+        const response = await fetch('/api/generate', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({
-                contents: [{ parts: [{ text: prompt }] }],
-                generationConfig: {
-                    temperature: 0.9,
-                    maxOutputTokens: 1024
-                }
-            })
+            body: JSON.stringify({ prompt })
         });
 
         console.log('📥 Response status:', response.status);
@@ -1199,16 +1150,14 @@ async function callGeminiAPI(prompt) {
         if (!response.ok) {
             const error = await response.json();
             console.error('❌ API Error:', error);
-            throw new Error(error.error?.message || "API request failed");
+            throw new Error(error.error || "API request failed");
         }
 
         const data = await response.json();
-        console.log('✅ API Response received:', data);
+        console.log('✅ API Response received');
+        console.log('📄 Generated text:', data.result.substring(0, 100) + '...');
 
-        const result = data.candidates[0].content.parts[0].text;
-        console.log('📄 Generated text:', result.substring(0, 100) + '...');
-
-        return result;
+        return data.result;
     } catch (error) {
         console.error('❌ Gemini API Error:', error);
         throw error;
@@ -1239,19 +1188,10 @@ Make it romantic and touching. Use her name "${COUPLE_INFO.wifeName}" naturally 
 Do not include any introduction or explanation, just the poem itself.`;
 
         try {
-            const apiKey = localStorage.getItem('geminiApiKey');
-            if (!apiKey) {
-                poemResult.innerHTML = `
-                    <p>🔑 Please set your Gemini API key first!</p>
-                    <p><a href="#" onclick="document.getElementById('apiKeyModal').classList.add('active'); return false;" style="color: var(--pink); text-decoration: underline;">Click here to set your API key</a></p>
-                `;
-                poemResult.style.display = 'block';
-            } else {
-                const poem = await callGeminiAPI(prompt);
-                poemResult.textContent = poem;
-                poemResult.style.display = 'block';
-                createConfetti();
-            }
+            const poem = await callGeminiAPI(prompt);
+            poemResult.textContent = poem;
+            poemResult.style.display = 'block';
+            createConfetti();
         } catch (error) {
             poemResult.textContent = "❌ " + error.message;
             poemResult.style.display = 'block';
@@ -1289,19 +1229,10 @@ Include sweet details about their love and the special moment mentioned.
 Do not include any introduction, just start the story directly.`;
 
         try {
-            const apiKey = localStorage.getItem('geminiApiKey');
-            if (!apiKey) {
-                storyResult.innerHTML = `
-                    <p>🔑 Please set your Gemini API key first!</p>
-                    <p><a href="#" onclick="document.getElementById('apiKeyModal').classList.add('active'); return false;" style="color: var(--pink); text-decoration: underline;">Click here to set your API key</a></p>
-                `;
-                storyResult.style.display = 'block';
-            } else {
-                const story = await callGeminiAPI(prompt);
-                storyResult.textContent = story;
-                storyResult.style.display = 'block';
-                createConfetti();
-            }
+            const story = await callGeminiAPI(prompt);
+            storyResult.textContent = story;
+            storyResult.style.display = 'block';
+            createConfetti();
         } catch (error) {
             storyResult.textContent = "❌ " + error.message;
             storyResult.style.display = 'block';
@@ -1563,26 +1494,12 @@ Make it poetic, romantic, and suitable for a Valentine's Day dedication.
 Format: Just the lyrics, no titles or explanations, one line per verse.`;
 
         try {
-            const apiKey = localStorage.getItem('geminiApiKey');
-            if (!apiKey) {
-                lyricsResult.innerHTML = `
-                    <p>🔑 Please set your Gemini API key first!</p>
-                    <p><a href="#" id="openApiKeyFromLyrics" style="color: var(--pink); text-decoration: underline; cursor: pointer;">Click here to set your API key</a></p>
-                `;
-                lyricsResult.style.display = 'block';
-                // Add click handler for the link
-                document.getElementById('openApiKeyFromLyrics').addEventListener('click', (e) => {
-                    e.preventDefault();
-                    document.getElementById('apiKeyModal').classList.add('active');
-                });
-            } else {
-                const lyrics = await callGeminiAPI(prompt);
-                lyricsResult.innerHTML = lyrics.split('\n').map(line =>
-                    `<p>${line}</p>`
-                ).join('');
-                lyricsResult.style.display = 'block';
-                createConfetti();
-            }
+            const lyrics = await callGeminiAPI(prompt);
+            lyricsResult.innerHTML = lyrics.split('\n').map(line =>
+                `<p>${line}</p>`
+            ).join('');
+            lyricsResult.style.display = 'block';
+            createConfetti();
         } catch (error) {
             lyricsResult.textContent = "❌ " + error.message;
             lyricsResult.style.display = 'block';
