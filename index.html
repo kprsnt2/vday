@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>💕 For My Dearest Divya 💕</title>
+    <title>💕 Valentine's Love Song 💕</title>
     <meta name="description" content="A special Valentine's Day countdown surprise">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -15,6 +15,58 @@
 </head>
 
 <body>
+    <!-- Welcome Modal (First Visit) -->
+    <div class="modal welcome-modal" id="welcomeModal">
+        <div class="modal-content welcome-content">
+            <div class="welcome-header">
+                <div class="welcome-hearts">💕🎵💕</div>
+                <h2 class="welcome-title">Welcome to Your Love Song</h2>
+                <p class="welcome-subtitle">Enter a name to personalize this experience</p>
+            </div>
+
+            <div class="welcome-form">
+                <div class="form-group">
+                    <label class="form-label">💝 Their Name <span class="required">*</span></label>
+                    <input type="text" id="recipientName" class="welcome-input" placeholder="Enter their name..."
+                        maxlength="20" required>
+                </div>
+
+                <div class="form-group optional-group">
+                    <label class="form-label">🎵 Custom Music <span class="optional-tag">(Optional)</span></label>
+                    <div class="file-upload-wrapper">
+                        <input type="file" id="customMusic" accept="audio/*" class="file-input">
+                        <label for="customMusic" class="file-upload-btn">
+                            <span class="upload-icon">📁</span>
+                            <span class="upload-text" id="musicFileName">Choose MP3 file...</span>
+                        </label>
+                    </div>
+                </div>
+
+                <div class="form-group optional-group">
+                    <label class="form-label">📷 Special Photo <span class="optional-tag">(Optional)</span></label>
+                    <div class="file-upload-wrapper">
+                        <input type="file" id="customPhoto" accept="image/*" class="file-input">
+                        <label for="customPhoto" class="file-upload-btn">
+                            <span class="upload-icon">🖼️</span>
+                            <span class="upload-text" id="photoFileName">Choose image...</span>
+                        </label>
+                    </div>
+                    <div class="photo-preview hidden" id="photoPreview">
+                        <img id="previewImage" alt="Preview">
+                    </div>
+                </div>
+
+                <button class="btn-welcome" id="startExperience" disabled>
+                    💕 Enter the Love World 💕
+                </button>
+
+                <div class="share-info">
+                    <p>✨ After creating, you'll get a shareable link!</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <!-- Floating Hearts Background -->
     <div class="hearts-bg" id="heartsBg"></div>
 
@@ -44,6 +96,10 @@
             <span class="nav-icon">🔐</span>
             <span class="nav-text">Love Lock</span>
         </button>
+        <button class="nav-btn" data-section="lyrics">
+            <span class="nav-icon">🎵</span>
+            <span class="nav-text">Love Song</span>
+        </button>
         <button class="nav-btn" data-section="ai">
             <span class="nav-icon">✨</span>
             <span class="nav-text">AI Magic</span>
@@ -59,7 +115,7 @@
                 <div class="sparkle sparkle-3">✨</div>
 
                 <h1 class="title">
-                    <span class="title-small">My Dearest Divya,</span>
+                    <span class="title-small">My Dearest <span class="recipient-name">Love</span>,</span>
                     <span class="title-main">Valentine's Day</span>
                     <span class="title-heart">💕</span>
                 </h1>
@@ -376,12 +432,96 @@
         </div>
     </section>
 
+    <!-- Song Lyrics Section -->
+    <section id="lyrics" class="section">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">🎵 Love Song for <span class="recipient-name">You</span></h2>
+                <p class="section-subtitle">A romantic melody dedicated to our love...</p>
+            </div>
+
+            <div class="lyrics-container">
+                <!-- Custom Photo Display -->
+                <div class="custom-photo-display hidden" id="customPhotoDisplay">
+                    <div class="photo-frame">
+                        <img id="displayPhoto" alt="Our Photo">
+                    </div>
+                </div>
+
+                <!-- Lyrics Display -->
+                <div class="lyrics-card">
+                    <div class="lyrics-header">
+                        <span class="lyrics-music-note">🎵</span>
+                        <h3 class="lyrics-title">Telugu Love Song</h3>
+                        <span class="lyrics-music-note">🎵</span>
+                    </div>
+                    <div class="lyrics-content" id="lyricsContent">
+                        <p class="lyric-line animate-lyric" style="--delay: 0.1s">In your eyes, I see my reflection...
+                        </p>
+                        <p class="lyric-line animate-lyric" style="--delay: 0.3s">In your smile, my heart finds its
+                            home...</p>
+                        <p class="lyric-line animate-lyric" style="--delay: 0.5s">With you beside me, heaven is here...
+                        </p>
+                        <p class="lyric-line animate-lyric" style="--delay: 0.7s">My love for you, forever sincere...
+                        </p>
+                        <p class="lyric-line animate-lyric" style="--delay: 0.9s">💕 <span class="recipient-name">My
+                                Love</span> 💕</p>
+                        <p class="lyric-line animate-lyric" style="--delay: 1.1s">Through every moment, I'll stand by
+                            your side...</p>
+                        <p class="lyric-line animate-lyric" style="--delay: 1.3s">In your love, my soul takes flight...
+                        </p>
+                        <p class="lyric-line animate-lyric" style="--delay: 1.5s">Together we'll walk this beautiful
+                            road...</p>
+                        <p class="lyric-line animate-lyric" style="--delay: 1.7s">With you for lifetimes, my heart has
+                            shown...</p>
+                    </div>
+                    <div class="lyrics-footer">
+                        <span class="dedication">✨ Dedicated to <span class="recipient-name">You</span> with all my love
+                            ✨</span>
+                    </div>
+                </div>
+
+                <!-- AI Generated Lyrics -->
+                <div class="ai-lyrics-card">
+                    <h3 class="ai-lyrics-title">✨ Generate Personalized Lyrics</h3>
+                    <p class="ai-lyrics-desc">Create a unique love song just for <span class="recipient-name">your
+                            love</span></p>
+                    <div class="ai-lyrics-input-group">
+                        <input type="text" class="ai-input" id="lyricsTheme"
+                            placeholder="Theme (e.g., first meeting, eternal love...)">
+                    </div>
+                    <button class="btn-ai" id="generateLyrics">🎵 Generate Love Lyrics</button>
+                    <div class="ai-lyrics-output hidden" id="lyricsOutput">
+                        <div class="ai-loading" id="lyricsLoading">
+                            <div class="loading-heart">💕</div>
+                            <p>Composing your love song...</p>
+                        </div>
+                        <div class="ai-lyrics-result" id="lyricsResult"></div>
+                    </div>
+                </div>
+
+                <!-- Share Button -->
+                <div class="share-section">
+                    <button class="btn-share" id="shareBtn">
+                        📤 Share This Love Song
+                    </button>
+                    <div class="share-link-container hidden" id="shareLinkContainer">
+                        <input type="text" class="share-link-input" id="shareLink" readonly>
+                        <button class="btn-copy" id="copyLink">📋 Copy</button>
+                    </div>
+                    <p class="share-copied hidden" id="shareCopied">✅ Link copied!</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
     <!-- AI Magic Section -->
     <section id="ai" class="section">
         <div class="container">
             <div class="section-header">
                 <h2 class="section-title">✨ AI Love Magic</h2>
-                <p class="section-subtitle">Let AI create something special just for Divya...</p>
+                <p class="section-subtitle">Let AI create something special just for <span class="recipient-name">your
+                        love</span>...</p>
             </div>
 
             <div class="ai-container">

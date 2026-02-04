@@ -1912,3 +1912,458 @@ body {
         padding: 25px;
     }
 }
+
+/* ===================================
+   Welcome Modal & Personalization
+   =================================== */
+
+.welcome-modal.active {
+    display: flex;
+}
+
+.welcome-content {
+    max-width: 500px;
+    padding: 40px;
+    background: linear-gradient(145deg, rgba(42, 27, 61, 0.98) 0%, rgba(26, 15, 37, 0.98) 100%);
+    border: 2px solid rgba(255, 107, 157, 0.3);
+    backdrop-filter: blur(20px);
+}
+
+.welcome-header {
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+.welcome-hearts {
+    font-size: 2.5rem;
+    margin-bottom: 15px;
+    animation: heartbeat 1.5s ease-in-out infinite;
+}
+
+.welcome-title {
+    font-family: var(--font-display);
+    font-size: 2rem;
+    background: var(--gradient-primary);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    margin-bottom: 10px;
+}
+
+.welcome-subtitle {
+    font-family: var(--font-script);
+    font-size: 1.2rem;
+    color: var(--pink-light);
+}
+
+.welcome-form {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.form-label {
+    font-size: 0.95rem;
+    color: var(--pink-light);
+    font-weight: 500;
+}
+
+.required {
+    color: var(--red);
+}
+
+.optional-tag {
+    font-size: 0.8rem;
+    color: var(--purple);
+    font-weight: 400;
+}
+
+.welcome-input {
+    padding: 15px 20px;
+    background: rgba(255, 255, 255, 0.05);
+    border: 2px solid rgba(255, 107, 157, 0.3);
+    border-radius: 15px;
+    color: var(--white);
+    font-family: var(--font-body);
+    font-size: 1rem;
+    transition: var(--transition-smooth);
+}
+
+.welcome-input::placeholder {
+    color: rgba(255, 255, 255, 0.4);
+}
+
+.welcome-input:focus {
+    outline: none;
+    border-color: var(--pink);
+    box-shadow: 0 0 20px rgba(255, 107, 157, 0.3);
+}
+
+.file-upload-wrapper {
+    position: relative;
+}
+
+.file-input {
+    position: absolute;
+    opacity: 0;
+    width: 100%;
+    height: 100%;
+    cursor: pointer;
+    z-index: 2;
+}
+
+.file-upload-btn {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 15px 20px;
+    background: rgba(255, 255, 255, 0.05);
+    border: 2px dashed rgba(255, 107, 157, 0.3);
+    border-radius: 15px;
+    color: var(--pink-light);
+    cursor: pointer;
+    transition: var(--transition-smooth);
+}
+
+.file-upload-btn:hover {
+    border-color: var(--pink);
+    background: rgba(255, 107, 157, 0.1);
+}
+
+.upload-icon {
+    font-size: 1.3rem;
+}
+
+.upload-text {
+    font-size: 0.95rem;
+}
+
+.photo-preview {
+    margin-top: 10px;
+    text-align: center;
+}
+
+.photo-preview img {
+    max-width: 150px;
+    max-height: 150px;
+    border-radius: 15px;
+    border: 2px solid var(--pink);
+    object-fit: cover;
+}
+
+.btn-welcome {
+    padding: 18px 30px;
+    background: var(--gradient-primary);
+    border: none;
+    border-radius: 30px;
+    color: var(--white);
+    font-family: var(--font-body);
+    font-size: 1.1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: var(--transition-bounce);
+    margin-top: 10px;
+}
+
+.btn-welcome:hover:not(:disabled) {
+    transform: scale(1.02);
+    box-shadow: var(--shadow-glow);
+}
+
+.btn-welcome:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
+.share-info {
+    text-align: center;
+    color: var(--purple);
+    font-size: 0.9rem;
+}
+
+/* ===================================
+   Song Lyrics Section
+   =================================== */
+
+.lyrics-container {
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+    align-items: center;
+}
+
+.custom-photo-display {
+    max-width: 300px;
+    margin: 0 auto 20px;
+}
+
+.photo-frame {
+    position: relative;
+    padding: 15px;
+    background: linear-gradient(145deg, rgba(255, 107, 157, 0.2), rgba(196, 69, 105, 0.2));
+    border-radius: 20px;
+    box-shadow: var(--shadow-glow);
+}
+
+.photo-frame::before {
+    content: '💕';
+    position: absolute;
+    top: -15px;
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 1.5rem;
+}
+
+.photo-frame img {
+    width: 100%;
+    border-radius: 15px;
+    display: block;
+}
+
+.lyrics-card {
+    background: var(--gradient-card);
+    backdrop-filter: blur(10px);
+    border: 2px solid rgba(255, 107, 157, 0.3);
+    border-radius: 30px;
+    padding: 40px;
+    max-width: 600px;
+    width: 100%;
+    text-align: center;
+    box-shadow: var(--shadow-card);
+}
+
+.lyrics-header {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 15px;
+    margin-bottom: 30px;
+}
+
+.lyrics-music-note {
+    font-size: 2rem;
+    animation: bounce 1s ease-in-out infinite alternate;
+}
+
+@keyframes bounce {
+    from {
+        transform: translateY(0);
+    }
+
+    to {
+        transform: translateY(-10px);
+    }
+}
+
+.lyrics-title {
+    font-family: var(--font-display);
+    font-size: 1.8rem;
+    background: var(--gradient-primary);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+.lyrics-content {
+    margin-bottom: 30px;
+}
+
+.lyric-line {
+    font-family: var(--font-script);
+    font-size: 1.4rem;
+    color: var(--pink-light);
+    margin: 15px 0;
+    opacity: 0;
+    animation: fadeInUp 0.6s ease forwards;
+    animation-delay: var(--delay, 0s);
+}
+
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.lyrics-footer {
+    margin-top: 25px;
+    padding-top: 20px;
+    border-top: 1px solid rgba(255, 107, 157, 0.3);
+}
+
+.dedication {
+    font-family: var(--font-script);
+    font-size: 1.2rem;
+    color: var(--pink);
+}
+
+.recipient-name {
+    color: var(--pink);
+    font-weight: 600;
+}
+
+/* AI Lyrics Card */
+.ai-lyrics-card {
+    background: var(--gradient-card);
+    backdrop-filter: blur(10px);
+    border: 2px solid rgba(255, 107, 157, 0.2);
+    border-radius: 25px;
+    padding: 30px;
+    max-width: 500px;
+    width: 100%;
+    text-align: center;
+}
+
+.ai-lyrics-title {
+    font-family: var(--font-display);
+    font-size: 1.5rem;
+    color: var(--pink);
+    margin-bottom: 10px;
+}
+
+.ai-lyrics-desc {
+    font-size: 0.95rem;
+    color: var(--pink-light);
+    margin-bottom: 20px;
+}
+
+.ai-lyrics-input-group {
+    margin-bottom: 20px;
+}
+
+.ai-lyrics-output {
+    margin-top: 20px;
+}
+
+.ai-lyrics-result {
+    font-family: var(--font-script);
+    font-size: 1.3rem;
+    color: var(--pink-light);
+    line-height: 1.8;
+    text-align: left;
+    padding: 20px;
+    background: rgba(0, 0, 0, 0.2);
+    border-radius: 15px;
+}
+
+/* Share Section */
+.share-section {
+    text-align: center;
+    margin-top: 20px;
+}
+
+.btn-share {
+    padding: 15px 35px;
+    background: var(--gradient-primary);
+    border: none;
+    border-radius: 30px;
+    color: var(--white);
+    font-family: var(--font-body);
+    font-size: 1rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: var(--transition-bounce);
+}
+
+.btn-share:hover {
+    transform: scale(1.05);
+    box-shadow: var(--shadow-glow);
+}
+
+.share-link-container {
+    display: flex;
+    gap: 10px;
+    margin-top: 15px;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.share-link-input {
+    padding: 12px 15px;
+    background: rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(255, 107, 157, 0.3);
+    border-radius: 10px;
+    color: var(--pink-light);
+    font-family: var(--font-body);
+    font-size: 0.85rem;
+    min-width: 250px;
+}
+
+.btn-copy {
+    padding: 12px 20px;
+    background: rgba(255, 107, 157, 0.2);
+    border: 1px solid var(--pink);
+    border-radius: 10px;
+    color: var(--white);
+    cursor: pointer;
+    transition: var(--transition-smooth);
+}
+
+.btn-copy:hover {
+    background: var(--pink);
+}
+
+.share-copied {
+    margin-top: 10px;
+    color: #00c853;
+    font-size: 0.9rem;
+}
+
+/* Hidden Class */
+.hidden {
+    display: none !important;
+}
+
+/* Mobile Responsive for New Features */
+@media (max-width: 768px) {
+    .welcome-content {
+        padding: 30px 20px;
+        margin: 20px;
+    }
+
+    .welcome-title {
+        font-size: 1.6rem;
+    }
+
+    .lyrics-card {
+        padding: 25px 20px;
+    }
+
+    .lyric-line {
+        font-size: 1.2rem;
+    }
+
+    .share-link-input {
+        min-width: 200px;
+    }
+
+    .nav {
+        flex-wrap: wrap;
+        max-width: 95%;
+        padding: 10px;
+    }
+
+    .nav-btn {
+        padding: 8px 12px;
+        font-size: 0.8rem;
+    }
+
+    .nav-text {
+        display: none;
+    }
+
+    .nav-icon {
+        font-size: 1.4rem;
+    }
+}

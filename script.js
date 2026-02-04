@@ -1275,3 +1275,278 @@ Do not include any introduction, just start the story directly.`;
         }
     });
 }
+
+// ============ Phase 5: Personalization System ============
+initPersonalization();
+
+function initPersonalization() {
+    setupWelcomeModal();
+    setupShareFeature();
+    setupLyricsGenerator();
+    checkURLParams();
+}
+
+// Check URL parameters for name
+function checkURLParams() {
+    const urlParams = new URLSearchParams(window.location.search);
+    const nameFromURL = urlParams.get('name');
+
+    if (nameFromURL) {
+        // Name provided in URL - use it and skip modal
+        setRecipientName(nameFromURL);
+        hideWelcomeModal();
+    } else {
+        // Check localStorage for saved name
+        const savedName = localStorage.getItem('recipientName');
+        if (savedName) {
+            setRecipientName(savedName);
+            hideWelcomeModal();
+        } else {
+            // Show welcome modal for first-time visitors
+            showWelcomeModal();
+        }
+    }
+
+    // Load saved custom photo if exists
+    const savedPhoto = localStorage.getItem('customPhoto');
+    if (savedPhoto) {
+        displayCustomPhoto(savedPhoto);
+    }
+
+    // Load saved custom music if exists
+    const savedMusic = localStorage.getItem('customMusic');
+    if (savedMusic) {
+        loadCustomMusic(savedMusic);
+    }
+}
+
+// Welcome Modal Setup
+function setupWelcomeModal() {
+    const welcomeModal = document.getElementById('welcomeModal');
+    const recipientNameInput = document.getElementById('recipientName');
+    const startBtn = document.getElementById('startExperience');
+    const customMusicInput = document.getElementById('customMusic');
+    const customPhotoInput = document.getElementById('customPhoto');
+    const musicFileName = document.getElementById('musicFileName');
+    const photoFileName = document.getElementById('photoFileName');
+    const photoPreview = document.getElementById('photoPreview');
+    const previewImage = document.getElementById('previewImage');
+
+    // Temp storage for files
+    let tempMusicData = null;
+    let tempPhotoData = null;
+
+    // Enable/disable start button based on name input
+    recipientNameInput.addEventListener('input', () => {
+        const hasName = recipientNameInput.value.trim().length > 0;
+        startBtn.disabled = !hasName;
+    });
+
+    // Handle music file selection
+    customMusicInput.addEventListener('change', (e) => {
+        const file = e.target.files[0];
+        if (file) {
+            musicFileName.textContent = file.name;
+            const reader = new FileReader();
+            reader.onload = (event) => {
+                tempMusicData = event.target.result;
+            };
+            reader.readAsDataURL(file);
+        }
+    });
+
+    // Handle photo file selection
+    customPhotoInput.addEventListener('change', (e) => {
+        const file = e.target.files[0];
+        if (file) {
+            photoFileName.textContent = file.name;
+            const reader = new FileReader();
+            reader.onload = (event) => {
+                tempPhotoData = event.target.result;
+                previewImage.src = event.target.result;
+                photoPreview.classList.remove('hidden');
+            };
+            reader.readAsDataURL(file);
+        }
+    });
+
+    // Start experience button
+    startBtn.addEventListener('click', () => {
+        const name = recipientNameInput.value.trim();
+        if (name) {
+            // Save to localStorage
+            localStorage.setItem('recipientName', name);
+
+            // Apply the name
+            setRecipientName(name);
+
+            // Handle custom music
+            if (tempMusicData) {
+                try {
+                    localStorage.setItem('customMusic', tempMusicData);
+                    loadCustomMusic(tempMusicData);
+                } catch (e) {
+                    console.log('Music too large for localStorage');
+                }
+            }
+
+            // Handle custom photo
+            if (tempPhotoData) {
+                try {
+                    localStorage.setItem('customPhoto', tempPhotoData);
+                    displayCustomPhoto(tempPhotoData);
+                } catch (e) {
+                    console.log('Photo too large for localStorage');
+                }
+            }
+
+            // Update URL without reload
+            updateURLWithName(name);
+
+            // Hide modal
+            hideWelcomeModal();
+
+            // Celebration effect
+            createConfetti();
+        }
+    });
+}
+
+function showWelcomeModal() {
+    const modal = document.getElementById('welcomeModal');
+    modal.classList.add('active');
+}
+
+function hideWelcomeModal() {
+    const modal = document.getElementById('welcomeModal');
+    modal.classList.remove('active');
+}
+
+// Set recipient name throughout the page
+function setRecipientName(name) {
+    const elements = document.querySelectorAll('.recipient-name');
+    elements.forEach(el => {
+        el.textContent = name;
+    });
+
+    // Update page title
+    document.title = `💕 For ${name} - Valentine's Love Song 💕`;
+}
+
+// Update URL with name parameter
+function updateURLWithName(name) {
+    const url = new URL(window.location.href);
+    url.searchParams.set('name', name);
+    window.history.replaceState({}, '', url);
+}
+
+// Load custom music
+function loadCustomMusic(musicData) {
+    const bgMusic = document.getElementById('bgMusic');
+    if (bgMusic && musicData) {
+        bgMusic.src = musicData;
+    }
+}
+
+// Display custom photo
+function displayCustomPhoto(photoData) {
+    const photoDisplay = document.getElementById('customPhotoDisplay');
+    const displayPhoto = document.getElementById('displayPhoto');
+
+    if (photoDisplay && displayPhoto && photoData) {
+        displayPhoto.src = photoData;
+        photoDisplay.classList.remove('hidden');
+    }
+}
+
+// Share Feature
+function setupShareFeature() {
+    const shareBtn = document.getElementById('shareBtn');
+    const shareLinkContainer = document.getElementById('shareLinkContainer');
+    const shareLink = document.getElementById('shareLink');
+    const copyBtn = document.getElementById('copyLink');
+    const shareCopied = document.getElementById('shareCopied');
+
+    if (!shareBtn) return;
+
+    shareBtn.addEventListener('click', () => {
+        const currentName = localStorage.getItem('recipientName') || 'Love';
+        const url = new URL(window.location.href);
+        url.searchParams.set('name', currentName);
+
+        shareLink.value = url.href;
+        shareLinkContainer.classList.remove('hidden');
+    });
+
+    if (copyBtn) {
+        copyBtn.addEventListener('click', async () => {
+            try {
+                await navigator.clipboard.writeText(shareLink.value);
+                shareCopied.classList.remove('hidden');
+                setTimeout(() => {
+                    shareCopied.classList.add('hidden');
+                }, 2000);
+            } catch (err) {
+                // Fallback
+                shareLink.select();
+                document.execCommand('copy');
+                shareCopied.classList.remove('hidden');
+                setTimeout(() => {
+                    shareCopied.classList.add('hidden');
+                }, 2000);
+            }
+        });
+    }
+}
+
+// AI Lyrics Generator
+function setupLyricsGenerator() {
+    const generateLyricsBtn = document.getElementById('generateLyrics');
+    const lyricsThemeInput = document.getElementById('lyricsTheme');
+    const lyricsOutput = document.getElementById('lyricsOutput');
+    const lyricsLoading = document.getElementById('lyricsLoading');
+    const lyricsResult = document.getElementById('lyricsResult');
+
+    if (!generateLyricsBtn) return;
+
+    generateLyricsBtn.addEventListener('click', async () => {
+        const theme = lyricsThemeInput.value.trim() || "eternal love";
+        const recipientName = localStorage.getItem('recipientName') || "my love";
+
+        lyricsOutput.classList.remove('hidden');
+        lyricsLoading.style.display = 'block';
+        lyricsResult.style.display = 'none';
+        generateLyricsBtn.disabled = true;
+
+        const prompt = `Write romantic love song lyrics for ${recipientName}.
+Theme: ${theme}
+Style: Mix of Telugu and English, romantic and heartfelt
+Length: 8-10 lines of lyrics
+Include the name "${recipientName}" at least once in the lyrics.
+Make it poetic, romantic, and suitable for a Valentine's Day dedication.
+Format: Just the lyrics, no titles or explanations, one line per verse.`;
+
+        try {
+            const apiKey = localStorage.getItem('geminiApiKey');
+            if (!apiKey) {
+                lyricsResult.innerHTML = `
+                    <p>🔑 Please set your Gemini API key first!</p>
+                    <p>Go to the <strong>AI Magic</strong> section and click "Set your Gemini API key"</p>
+                `;
+            } else {
+                const lyrics = await callGeminiAPI(prompt);
+                lyricsResult.innerHTML = lyrics.split('\n').map(line =>
+                    `<p>${line}</p>`
+                ).join('');
+                createConfetti();
+            }
+            lyricsResult.style.display = 'block';
+        } catch (error) {
+            lyricsResult.textContent = "❌ " + error.message;
+            lyricsResult.style.display = 'block';
+        } finally {
+            lyricsLoading.style.display = 'none';
+            generateLyricsBtn.disabled = false;
+        }
+    });
+}
