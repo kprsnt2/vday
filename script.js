@@ -1126,11 +1126,27 @@ function initAIMagic() {
 }
 
 // Couple's special details
-const COUPLE_INFO = {
-    wifeName: "Divya",
-    weddingDate: "April 27, 2016",
-    yearsMarried: new Date().getFullYear() - 2016
+// Couple's special details (Dynamic)
+let COUPLE_INFO = {
+    partnerName: "My Love",
+    startDate: "2020-01-01",
+    yearsTogether: 1
 };
+
+function updateCoupleInfo(name, dateStr) {
+    COUPLE_INFO.partnerName = name;
+    if (dateStr) {
+        COUPLE_INFO.startDate = new Date(dateStr).toLocaleDateString('en-US', {
+            year: 'numeric', month: 'long', day: 'numeric'
+        });
+
+        const start = new Date(dateStr);
+        const now = new Date();
+        const diffTime = Math.abs(now - start);
+        const diffYears = diffTime / (1000 * 60 * 60 * 24 * 365.25);
+        COUPLE_INFO.yearsTogether = diffYears.toFixed(1);
+    }
+}
 
 // Gemini API Call - Uses serverless function with environment variable
 async function callGeminiAPI(prompt) {
@@ -1198,11 +1214,11 @@ function setupPoemGenerator() {
         poemResult.style.display = 'none';
         generatePoemBtn.disabled = true;
 
-        const prompt = `Write a beautiful, romantic love poem for my wife ${COUPLE_INFO.wifeName}. 
-We got married on ${COUPLE_INFO.weddingDate} and have been happily married for ${COUPLE_INFO.yearsMarried} wonderful years.
+        const prompt = `Write a beautiful, romantic love poem for my partner ${COUPLE_INFO.partnerName}. 
+We have been together since ${COUPLE_INFO.startDate} (about ${COUPLE_INFO.yearsTogether} years).
 Theme: ${theme}
 The poem should be heartfelt, personal, and about 12-16 lines.
-Make it romantic and touching. Use her name "${COUPLE_INFO.wifeName}" naturally in the poem.
+Make it romantic and touching. Use the name "${COUPLE_INFO.partnerName}" naturally in the poem.
 Do not include any introduction or explanation, just the poem itself.`;
 
         try {
@@ -1238,8 +1254,8 @@ function setupStoryGenerator() {
         storyResult.style.display = 'none';
         generateStoryBtn.disabled = true;
 
-        const prompt = `Write a romantic short love story about ${partnerName} and ${COUPLE_INFO.wifeName}.
-They got married on ${COUPLE_INFO.weddingDate} and have been together for ${COUPLE_INFO.yearsMarried} beautiful years.
+        const prompt = `Write a romantic short love story about ${partnerName} and ${COUPLE_INFO.partnerName}.
+They have been together for ${COUPLE_INFO.yearsTogether} years (since ${COUPLE_INFO.startDate}).
 Special moment to focus on: ${moment}
 Write in first person from ${partnerName}'s perspective.
 Make it romantic, touching, and about 200-300 words.
@@ -1285,6 +1301,14 @@ function checkURLParams() {
         const savedName = localStorage.getItem('recipientName');
         if (savedName) {
             setRecipientName(savedName);
+            setRecipientName(savedName);
+
+            // Load saved date
+            const savedDate = localStorage.getItem('anniversaryDate');
+            if (savedDate) {
+                updateCoupleInfo(savedName, savedDate);
+            }
+
             hideWelcomeModal();
         } else {
             // Show welcome modal for first-time visitors
@@ -1321,11 +1345,18 @@ function setupWelcomeModal() {
     let tempMusicData = null;
     let tempPhotoData = null;
 
-    // Enable/disable start button based on name input
-    recipientNameInput.addEventListener('input', () => {
+    const anniversaryInput = document.getElementById('anniversaryDate');
+
+    // Validation function
+    function validateInputs() {
         const hasName = recipientNameInput.value.trim().length > 0;
-        startBtn.disabled = !hasName;
-    });
+        const hasDate = anniversaryInput.value.trim().length > 0;
+        startBtn.disabled = !(hasName && hasDate);
+    }
+
+    // Enable/disable start button based on inputs
+    recipientNameInput.addEventListener('input', validateInputs);
+    anniversaryInput.addEventListener('input', validateInputs);
 
     // Handle music file selection
     customMusicInput.addEventListener('change', (e) => {
@@ -1358,9 +1389,15 @@ function setupWelcomeModal() {
     // Start experience button
     startBtn.addEventListener('click', () => {
         const name = recipientNameInput.value.trim();
-        if (name) {
+        const date = anniversaryInput.value;
+
+        if (name && date) {
             // Save to localStorage
             localStorage.setItem('recipientName', name);
+            localStorage.setItem('anniversaryDate', date);
+
+            // Update info
+            updateCoupleInfo(name, date);
 
             // Apply the name
             setRecipientName(name);
@@ -1505,7 +1542,7 @@ function setupLyricsGenerator() {
 
         const prompt = `Write romantic love song lyrics for ${recipientName}.
 Theme: ${theme}
-Style: Mix of Telugu and English, romantic and heartfelt
+Style: Romantic, heartfelt, and emotional
 Length: 8-10 lines of lyrics
 Include the name "${recipientName}" at least once in the lyrics.
 Make it poetic, romantic, and suitable for a Valentine's Day dedication.

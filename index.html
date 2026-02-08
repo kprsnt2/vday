@@ -4,8 +4,66 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>💕 Valentine's Love Song 💕</title>
-    <meta name="description" content="A special Valentine's Day countdown surprise">
+    <!-- SEO Optimization -->
+    <title>Romantic Valentine's Surprise - Virtual Gifts, Love Calculator & Games</title>
+    <meta name="description"
+        content="Create a magical Valentine's Day surprise! Features a 14-day countdown, daily virtual gifts, love calculator, romantic games, and AI-generated love poems & stories. best valentine gift 2026.">
+    <meta name="keywords"
+        content="valentine day gift, virtual valentine surprise, love calculator, romantic games for couples, ai love poem generator, valentine countdown 2026, online valentine gift">
+    <meta name="author" content="Your Name">
+    <meta name="theme-color" content="#ff6b9d">
+
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://vday-surprise.vercel.app/">
+    <meta property="og:title" content="Romantic Valentine's Surprise - Virtual Gifts & Games">
+    <meta property="og:description"
+        content="Surprise your love with a magical digital experience! Daily gifts, love calculator, games, and AI stories.">
+    <meta property="og:image" content="https://vday-surprise.vercel.app/preview.png">
+
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image">
+    <meta property="twitter:title" content="Romantic Valentine's Surprise - Virtual Gifts & Games">
+    <meta property="twitter:description"
+        content="Surprise your love with a magical digital experience! Daily gifts, love calculator, games, and AI stories.">
+    <meta property="twitter:image" content="https://vday-surprise.vercel.app/preview.png">
+
+    <!-- Google Analytics (GA4) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-8X3TNPE0EB"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag() { dataLayer.push(arguments); }
+        gtag('js', new Date());
+        gtag('config', 'G-8X3TNPE0EB');
+    </script>
+
+    <!-- Vercel Analytics -->
+    <script>
+        window.va = window.va || function () { (window.vaq = window.vaq || []).push(arguments); };
+    </script>
+    <script defer src="/_vercel/insights/script.js"></script>
+
+    <!-- JSON-LD Structured Data for SEO -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "SoftwareApplication",
+      "name": "Valentine's Day Surprise",
+      "applicationCategory": "EntertainmentApplication",
+      "offers": {
+        "@type": "Offer",
+        "price": "0",
+        "priceCurrency": "USD"
+      },
+      "aggregateRating": {
+        "@type": "AggregateRating",
+        "ratingValue": "5",
+        "ratingCount": "100"
+      },
+      "description": "An interactive digital Valentine's Day experience featuring countdowns, daily virtual gifts, love quizzes, and AI-powered romantic content generation."
+    }
+    </script>
+
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link
@@ -29,6 +87,11 @@
                     <label class="form-label">💝 Their Name <span class="required">*</span></label>
                     <input type="text" id="recipientName" class="welcome-input" placeholder="Enter their name..."
                         maxlength="20" required>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label">📅 Anniversary / First Met Date <span class="required">*</span></label>
+                    <input type="date" id="anniversaryDate" class="welcome-input" required>
                 </div>
 
                 <div class="form-group optional-group">
@@ -452,7 +515,7 @@
                 <div class="lyrics-card">
                     <div class="lyrics-header">
                         <span class="lyrics-music-note">🎵</span>
-                        <h3 class="lyrics-title">Telugu Love Song</h3>
+                        <h3 class="lyrics-title">Love Song</h3>
                         <span class="lyrics-music-note">🎵</span>
                     </div>
                     <div class="lyrics-content" id="lyricsContent">
@@ -626,6 +689,12 @@
 
     <!-- Floating Love Card Button -->
     <button class="floating-card-btn" id="openCardBtn">💌</button>
+
+    <!-- Buy Me a Coffee Button -->
+    <a href="#" target="_blank" class="bmc-button" id="bmcButton">
+        <img src="https://buymeacoffee.com/kprsnt" alt="Buy Me A Coffee"
+            style="height: 40px !important; width: 145px !important;">
+    </a>
 
     <script src="script.js"></script>
 </body>

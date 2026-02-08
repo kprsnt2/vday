@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://vday-surprise.vercel.app/sitemap.xml
